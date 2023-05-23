@@ -1,0 +1,51 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+
+  UtilityFunction:
+    enabled: false
+
+  FeatureEnvy:
+    enabled: false
+
+  NilCheck:
+    enabled: false
+
+  NestedIterators:
+    max_allowed_nesting: 2
+    ignore_iterators:
+      - yield_self
+      - tap
+      - lambda
+
+  TooManyMethods:
+    max_methods: 20
+
+  TooManyStatements:
+    max_statements: 10
+    exclude:
+      - initialize
+
+  DuplicateMethodCall:
+    max_calls: 2
+    allow_calls:
+      - logger.info
+
+  TooManyInstanceVariables:
+    max_instance_variables: 10
+
+  ManualDispatch:
+    exclude:
+      - HooksController#create
+
+  BooleanParameter:
+    enabled: false
+
+  UncommunicativeVariableName:
+    accept:
+      - _
+
+exclude_paths:
+  - bin
+  - vendor/bundle
+  - spec
