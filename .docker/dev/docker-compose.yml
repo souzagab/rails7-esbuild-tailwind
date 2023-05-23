@@ -19,6 +19,7 @@ x-app: &app
     - ../../.:/rails-app
   environment:
     - DATABASE_URL=postgres://postgres:secret@postgres:5432
+    - REDIS_URL=redis://redis:6379
   ports:
     - 3000:3000
   depends_on:
@@ -43,7 +44,7 @@ x-assets: &assets
 services:
   app:
     <<: *app
-    container_name: rails-app
+    container_name: app
     command: "bundle exec rails s -b 0.0.0.0"
     ports:
       - "3000:3000"
@@ -58,7 +59,7 @@ services:
 
   # worker:
   #   <<: *app
-  #   container_name: sidekiq
+  #   container_name: worker
   #   command: "bundle exec sidekiq -C config/sidekiq.yml"
   #   entrypoint: []
   #   profiles:
