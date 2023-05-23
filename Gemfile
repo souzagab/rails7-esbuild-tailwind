@@ -53,13 +53,9 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails", "~> 6.2"
   gem "bullet", "~> 7.0"
-  gem "rspec-rails", "~> 6.0"
-  gem "faker", "~> 3.2"
-  gem "shoulda-matchers", "~> 5.3"
 
   gem "solargraph"
   gem "solargraph-rails"
-
   gem "reek", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
@@ -76,4 +72,15 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+end
+
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "rspec-rails", "~> 6.0"
+  gem "faker", "~> 3.2"
+  gem "shoulda-matchers", "~> 5.3"
+
+  gem "capybara", "~> 3.3"
+  gem "selenium-webdriver",  "~> 4.9"
+  gem "webdrivers", "~> 5.2"
 end
