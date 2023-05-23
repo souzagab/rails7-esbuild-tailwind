@@ -11,7 +11,7 @@ ARG APP_USER_GROUP=1000
 
 ARG APP_USER=app
 ARG APP_GROUP=app
-ARG APP_PATH=/rails-api
+ARG APP_PATH=/rails-app
 
 ARG PG_VERSION=15
 
@@ -60,7 +60,7 @@ ARG APP_USER_GROUP=1000
 
 ARG APP_USER=app
 ARG APP_GROUP=app
-ARG APP_PATH=/rails-api
+ARG APP_PATH=/rails-app
 
 RUN apk add --update --no-cache libpq-dev tzdata bash less \
   && addgroup -g $APP_USER_GROUP -S $APP_GROUP \
