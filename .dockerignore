@@ -1,0 +1,17 @@
+.git
+.gitignore
+.cache
+# .docker
+.k8s/
+# .config/
+
+.dockerignore
+
+.env*
+!.env*.example
+
+.bundle/
+vendor/
+
+.ruby-version
+.tool-versions

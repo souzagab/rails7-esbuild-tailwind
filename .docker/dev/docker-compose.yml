@@ -1,0 +1,94 @@
+version: "3.8"
+
+volumes:
+  bundler:
+  pg-data:
+
+networks:
+  rails-app:
+
+x-app: &app
+  image: "rails-app:dev"
+  build:
+    context: ../../. # Project root
+    dockerfile: .docker/dev/Dockerfile
+    target: app
+  tty: true
+  volumes:
+    - bundler:/rails-app/vendor
+    - ../../.:/rails-app
+  environment:
+    - DATABASE_URL=postgres://postgres:secret@postgres:5432
+    - REDIS_URL=redis://redis:6379
+  ports:
+    - 3000:3000
+  depends_on:
+    - postgres
+    - redis
+  networks:
+    - rails-app
+
+x-assets: &assets
+  image: "rails-app:dev"
+  build:
+    context: ../../. # Project root
+    dockerfile: .docker/dev/Dockerfile
+    target: assets
+  tty: true
+  volumes:
+    - bundler:/rails-app/vendor
+    - ../../.:/rails-app
+  networks:
+    - rails-app
+
+services:
+  app:
+    <<: *app
+    container_name: app
+    command: "bundle exec rails s -b 0.0.0.0"
+    ports:
+      - "3000:3000"
+
+  # cable:
+  #   <<: *app
+  #   container_name: cable
+  #   command: "bundle exec puma -p 28080 cable/config.ru"
+  #   entrypoint: []
+  #   ports:
+  #     - "28080:28080"
+
+  # worker:
+  #   <<: *app
+  #   container_name: worker
+  #   command: "bundle exec sidekiq -C config/sidekiq.yml"
+  #   entrypoint: []
+  #   profiles:
+  #     - worker
+
+  js:
+    <<: *assets
+    container_name: js
+    command: "yarn build --watch"
+
+  css:
+    <<: *assets
+    container_name: css
+    command: "yarn build:css --watch"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "secret"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - rails-app
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - 6379
+    networks:
+      - rails-app
