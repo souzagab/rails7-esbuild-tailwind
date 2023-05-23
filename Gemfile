@@ -37,7 +37,7 @@ gem "redis", "~> 4.0"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -81,6 +81,6 @@ group :test do
   gem "shoulda-matchers", "~> 5.3"
 
   gem "capybara", "~> 3.3"
-  gem "selenium-webdriver",  "~> 4.9"
+  gem "selenium-webdriver", "~> 4.9"
   gem "webdrivers", "~> 5.2"
 end
