@@ -1,0 +1,58 @@
+# Only for testing purposes
+# ---
+version: "3.8"
+
+volumes:
+  bundler:
+  pg-data:
+
+networks:
+  rails:
+
+x-app: &app
+  image: "rails:latest"
+  build:
+    context: ../../. # Project root
+    dockerfile: .docker/prod/Dockerfile
+    target: app
+  tty: true
+  volumes:
+    - bundler:/rails/vendor
+    - ../../.:/rails
+  environment:
+    - DATABASE_URL=postgres://postgres:secret@postgres:5432/rails
+    - REDIS_URL=redis://redis:6379
+    - SECRET_KEY_BASE=DUMMY
+  ports:
+    - 3000:3000
+  depends_on:
+    - postgres
+    - redis
+  networks:
+    - rails
+
+services:
+  app:
+    <<: *app
+    container_name: app
+    command: "bundle exec rails s -b 0.0.0.0"
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "secret"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - rails
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - 6379
+    networks:
+      - rails
