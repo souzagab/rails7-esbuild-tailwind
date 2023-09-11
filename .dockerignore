@@ -11,7 +11,29 @@
 !.env*.example
 
 .bundle/
+/.bundle
 vendor/
 
 .ruby-version
 .tool-versions
+
+/config/master.key
+/config/credentials/*.key
+/.env*
+!/.env.example
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets
