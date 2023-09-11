@@ -334,7 +334,7 @@ DEPENDENCIES
   jsbundling-rails
   pg
   puma (~> 5.0)
-  rails (~> 7.0.4, >= 7.0.4.3)
+  rails (~> 7.0.8)
   redis (~> 4.0)
   reek
   rspec-rails (~> 6.0)
