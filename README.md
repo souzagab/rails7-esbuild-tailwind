@@ -1,5 +1,5 @@
-# Rails 7 App
+# Rails 7 + Esbuild + Tailwind
 
-> :warning: **This is a work in progress.** :warning:
+> Rails 7 + esbuild + TailwindCSS + Hotwire + Stimulus
 
-Rails 7 + esbuild + TailwindCSS + Hotwire + Stimulus
+Clone + Rename 
